@@ -1,11 +1,15 @@
 import { useSelector, useDispatch } from "react-redux";
+import io from 'socket.io-client';
 
-const Counter = () => {
+const socket = io.connect('http://localhost:3001'); 
+
+const Drawing = () => {
   const drawing = useSelector((state) => state.draw.drawing); 
  
   // Send drawing data to web socket server.
-  function handleClick(drawing){
-    
+  function handleClick(){
+    socket.emit('send-drawing', drawing) 
+    // console.log(drawing); 
   }
 
   return (
@@ -15,4 +19,4 @@ const Counter = () => {
   ); 
 };
 
-export default Counter;
+export default Drawing; 

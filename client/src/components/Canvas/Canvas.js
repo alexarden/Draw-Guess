@@ -4,6 +4,7 @@ import style from './Canvas.module.scss';
 import { useSelector, useDispatch } from "react-redux";
 import { setDrawing } from "../../features/drawing/drawingSlice";
 
+
 function getSize(height,width){
   
   return [height * 0.8, width * 0.9] 
@@ -12,8 +13,6 @@ function getSize(height,width){
 
 export default function Canvas() {
 
-  // Del
-  // const drawing = useSelector((state) => state.draw.drawing); 
   const dispatch = useDispatch();
 
   const [size, setSize] = useState([200,200])
@@ -24,9 +23,7 @@ export default function Canvas() {
     const canvas = canvasRef.current;
     const drawings = canvas.getSaveData();
     dispatch(setDrawing(drawings)); 
-    // Del 
-    // console.log(drawing);
-    // console.log(drawings);
+
   }
 
   function getWindowSize(){
@@ -41,6 +38,7 @@ export default function Canvas() {
   },[])   
 
   useEffect(() => {
+    
     window.addEventListener('resize', () => {
       handleCanvasChange(); 
       getWindowSize();

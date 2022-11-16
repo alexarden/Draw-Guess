@@ -2,7 +2,7 @@ import {useEffect, useState} from 'react';
 import { BrowserRouter, Routes, Route} from "react-router-dom";
 import Canvas from './Canvas/Canvas.js'; 
 import style from './App.module.scss';  
-
+import Drawing from '../features/drawing/Drawing'; 
 import io from 'socket.io-client';
 
 const socket = io.connect('http://localhost:3001');  
@@ -21,6 +21,7 @@ function App() {
     };
   }, []);
 
+  // Del
   useEffect(() => {
     socket.on('connect', () => {
       setIsConnected(true);
@@ -32,14 +33,21 @@ function App() {
 
     socket.on('pong', () => {
       setLastPong(new Date().toISOString());
+      console.log('pong'); 
     });
+
+    socket.on('get-drawing', (data) => {
+      console.log(data);
+    })
 
     return () => {
       socket.off('connect');
       socket.off('disconnect');
       socket.off('pong');
+      socket.off('get-drawing'); 
     };
   }, []);
+  //
 
   const sendPing = () => {
     socket.emit('ping');
@@ -51,6 +59,7 @@ function App() {
       <p>Last pong: { lastPong || '-' }</p>
       <button onClick={ sendPing }>Send ping</button> 
       <Canvas/>   
+      <Drawing/>
     </BrowserRouter>
   );
 }

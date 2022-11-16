@@ -19,10 +19,19 @@ app.get('/', (req, res) => {
 });
 
 io.on('connection', (socket) => {
+
   console.log('a user connected');
+
+  // Del
   socket.on('ping', (data) => {
-    socket.broadcast.emit('pong', data)  
-  })
+    socket.emit('pong', data)  
+    console.log('ping'); 
+  });
+  //
+
+  socket.on('send-drawing', (data) => {
+    socket.emit('get-drawing', data) 
+  });
 }); 
 
 server.listen(3001, () => {
