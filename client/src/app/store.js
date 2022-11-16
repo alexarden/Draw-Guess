@@ -1,9 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
-import counterReducer from '../features/counter/counterSlice';
+import drawingReducer from '../features/drawing/drawingSlice';
 
 
 export const store = configureStore({
     reducer: {
-        counter: counterReducer
+        draw: drawingReducer
     }
 })
