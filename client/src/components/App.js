@@ -1,9 +1,8 @@
 import {useEffect, useState} from 'react'; 
-import { Routes, Route, Outlet, Link } from "react-router-dom";
-// import Canvas from './Canvas/Canvas.js'; 
-// import Drawing from '../features/drawing/SendDrawingButton'; 
+import { Routes, Route, Outlet, Link } from "react-router-dom"; 
 import Welcome from './Welcome/Welcome'; 
 import ChooseWord from './ChooseWord/ChooseWord';  
+import Draw from './Draw/Draw'; 
 import style from './App.module.scss';  
 import {socket} from '../service/socket.js';
 
@@ -54,6 +53,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Welcome />}></Route>
           <Route path='choose-word' element={<ChooseWord/>}></Route> 
+          <Route path='draw' element={<Draw/>}></Route>  
         </Routes>
       </div>
     
