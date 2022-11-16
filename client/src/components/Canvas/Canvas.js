@@ -6,7 +6,7 @@ import { setDrawing } from "../../features/drawing/drawingSlice";
 import { socket } from "../../service/socket";
 
 function getSize(height, width) {
-  return [height * 0.8, width * 0.9];
+  return [height * 0.75, width * 0.8];  
 }
 
 export default function Canvas() {
