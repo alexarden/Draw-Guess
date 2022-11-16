@@ -1,5 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
-import {socket} from "../../service/socket.js"; 
+import {socket} from "../../service/socket.js";
+import style from '../../styles/Button.module.scss'; 
 
 const SendDrawingButton = () => {
   const drawing = useSelector((state) => state.draw.drawing); 
@@ -13,7 +14,7 @@ const SendDrawingButton = () => {
 
   return (
     <div>
-      <button onClick={handleClick}>Send Drawing</button>
+      <button className={style.button} onClick={handleClick}>Send Drawing</button>
     </div> 
   ); 
 };
