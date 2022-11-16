@@ -1,4 +1,4 @@
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import {socket} from "../../service/socket.js";
 import style from '../../styles/Button.module.scss'; 
 

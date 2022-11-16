@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef } from "react";
 import CanvasDraw from 'react-canvas-draw'; 
 import style from './Canvas.module.scss';
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { setDrawing } from "../../features/drawing/drawingSlice";
 import {socket} from '../../service/socket';
 
