@@ -31,8 +31,8 @@ io.on('connection', (socket) => {
   console.log(connections += 1);
   //
 
-  socket.on('drawing', (data) => { 
-    socket.emit('drawing-from-server', data) 
+  socket.on('drawing', (data) => {  
+    socket.broadcast.emit('drawing-from-server', data) 
   });
 
   socket.on('connections', () => {
