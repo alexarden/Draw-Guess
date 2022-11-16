@@ -1,0 +1,8 @@
+client/node_modules  
+server/node_modules  
+node_modules
+client/build 
+deploy
+dist 
+.env 
+gulpfile.js 
