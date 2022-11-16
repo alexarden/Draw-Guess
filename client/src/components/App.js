@@ -2,7 +2,7 @@ import {useEffect, useState} from 'react';
 import { BrowserRouter, Routes, Route} from "react-router-dom";
 import Canvas from './Canvas/Canvas.js'; 
 import style from './App.module.scss';  
-import Drawing from '../features/drawing/Drawing'; 
+import Drawing from '../features/drawing/SendDrawingButton'; 
 import {socket} from '../service/socket.js';
 
 function App() {
