@@ -54,6 +54,7 @@ export default function Canvas() {
 
    useEffect(() => {
     socket.on('drawing-from-server', (data) => {
+      if(!data.payload) return
       canvasRef.current.loadSaveData(data.payload); 
     }) 
 

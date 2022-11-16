@@ -6,8 +6,6 @@ const cors = require('cors');
 app.use(cors);
 const server = http.createServer(app);
 
-
-
 const io = new Server(server, {
   cors: {
     origin: 'http://localhost:3000',
@@ -15,20 +13,19 @@ const io = new Server(server, {
   },
 });
 
-
 app.get('/', (req, res) => {
   res.sendFile(__dirname + '/index.html');
 });
 
-
+let connections = 0;  
 
 io.on('connection', (socket) => {
 
-  let connections = 0;  
 
   // Del
   console.log('a user connected');
-  console.log(connections += 1);
+  connections += 1
+  console.log(connections);
   //
 
   socket.on('drawing', (data) => {  
@@ -40,8 +37,9 @@ io.on('connection', (socket) => {
   })
 
   socket.on('disconnect', () => {
-    console.log(connections -= 1); 
-  })
+    connections -= 1
+    console.log(connections); 
+  }) 
 }); 
 
 

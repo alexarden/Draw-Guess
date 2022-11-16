@@ -1,6 +1,7 @@
 .button{
+    display: block; 
     padding: 8px;
-    margin: 12px; 
+    margin: 12px auto;  
     border-radius: 8px;
     border: none;
     width: 100px;
@@ -10,8 +11,7 @@
     background-color: #f10ea1;
 
     &:hover{
-        cursor: pointer;
-        animation: pop 3s linear;  
+        cursor: pointer; 
         transform: translateY(-5px);
         box-shadow: 0px 5px 5px #777777;  
     }
