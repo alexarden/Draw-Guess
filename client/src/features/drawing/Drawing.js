@@ -1,12 +1,12 @@
 import { useSelector, useDispatch } from "react-redux";
-import { useState } from "react";
-import { setDrawing } from "./drawingSlice";
 
 const Counter = () => {
   const drawing = useSelector((state) => state.draw.drawing); 
-  const dispatch = useDispatch();
-
+ 
   // Send drawing data to web socket server.
+  function handleClick(drawing){
+    
+  }
 
   return (
     <div>

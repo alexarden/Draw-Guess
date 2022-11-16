@@ -12,8 +12,8 @@ function getSize(height,width){
 
 export default function Canvas() {
 
-
-  const drawing = useSelector((state) => state.draw.drawing); 
+  // Del
+  // const drawing = useSelector((state) => state.draw.drawing); 
   const dispatch = useDispatch();
 
   const [size, setSize] = useState([200,200])
@@ -24,8 +24,9 @@ export default function Canvas() {
     const canvas = canvasRef.current;
     const drawings = canvas.getSaveData();
     dispatch(setDrawing(drawings)); 
-    console.log(drawing);
-    console.log(drawings);
+    // Del 
+    // console.log(drawing);
+    // console.log(drawings);
   }
 
   function getWindowSize(){
