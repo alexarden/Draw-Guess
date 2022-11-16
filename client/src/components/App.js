@@ -3,9 +3,7 @@ import { BrowserRouter, Routes, Route} from "react-router-dom";
 import Canvas from './Canvas/Canvas.js'; 
 import style from './App.module.scss';  
 import Drawing from '../features/drawing/Drawing'; 
-import io from 'socket.io-client';
-
-const socket = io.connect('http://localhost:3001');  
+import {socket} from '../service/socket';
 
 function App() {
 

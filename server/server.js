@@ -6,6 +6,9 @@ const cors = require('cors');
 app.use(cors);
 const server = http.createServer(app);
 
+let connections = 0  
+
+
 const io = new Server(server, {
   cors: {
     origin: 'http://localhost:3000',
@@ -21,6 +24,7 @@ app.get('/', (req, res) => {
 io.on('connection', (socket) => {
 
   console.log('a user connected');
+  console.log(connections += 1);
 
   // Del
   socket.on('ping', (data) => {
