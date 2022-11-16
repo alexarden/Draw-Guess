@@ -6,7 +6,6 @@ const cors = require('cors');
 app.use(cors);
 const server = http.createServer(app);
 
-let connections = 0  
 
 
 const io = new Server(server, {
@@ -21,22 +20,30 @@ app.get('/', (req, res) => {
   res.sendFile(__dirname + '/index.html');
 });
 
+
+
 io.on('connection', (socket) => {
 
-  console.log('a user connected');
-  console.log(connections += 1);
+  let connections = 0;  
 
   // Del
-  socket.on('ping', (data) => {
-    socket.emit('pong', data)  
-    console.log('ping'); 
-  });
+  console.log('a user connected');
+  console.log(connections += 1);
   //
 
-  socket.on('send-drawing', (data) => {
-    socket.emit('get-drawing', data) 
+  socket.on('drawing', (data) => { 
+    socket.emit('drawing-from-server', data) 
   });
+
+  socket.on('connections', () => {
+    socket.emit('connections-from-server', connections)  
+  })
+
+  socket.on('disconnect', () => {
+    console.log(connections -= 1); 
+  })
 }); 
+
 
 server.listen(3001, () => {
   console.log('listening on *:3001');

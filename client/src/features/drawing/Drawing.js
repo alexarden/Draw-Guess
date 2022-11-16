@@ -1,12 +1,13 @@
 import { useSelector, useDispatch } from "react-redux";
-import {socket} from "../../service/socket"; 
+import {socket} from "../../service/socket.js"; 
 
 const Drawing = () => {
   const drawing = useSelector((state) => state.draw.drawing); 
  
   // Send drawing data to web socket server.
   function handleClick(){
-    socket.emit('send-drawing', drawing) 
+    socket.emit('drawing', drawing) 
+    socket.emit('connections') 
     // console.log(drawing); 
   }
 

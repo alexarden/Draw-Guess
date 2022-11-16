@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route} from "react-router-dom";
 import Canvas from './Canvas/Canvas.js'; 
 import style from './App.module.scss';  
 import Drawing from '../features/drawing/Drawing'; 
-import {socket} from '../service/socket';
+import {socket} from '../service/socket.js';
 
 function App() {
 
@@ -19,7 +19,7 @@ function App() {
     };
   }, []);
 
-  // Del
+  
   useEffect(() => {
     socket.on('connect', () => {
       setIsConnected(true);
@@ -29,33 +29,25 @@ function App() {
       setIsConnected(false);
     });
 
-    socket.on('pong', () => {
-      setLastPong(new Date().toISOString());
-      console.log('pong'); 
-    });
-
-    socket.on('get-drawing', (data) => {
+    socket.on('drawing-from-server', (data) => {  
       console.log(data);
+    })
+
+    socket.on('connections-from-server', (data) => {
+      console.log(data); 
     })
 
     return () => {
       socket.off('connect');
       socket.off('disconnect');
-      socket.off('pong');
-      socket.off('get-drawing'); 
+      socket.off('drawing-from-server'); 
     };
   }, []);
-  //
-
-  const sendPing = () => {
-    socket.emit('ping');
-  }
+  
 
   return ( 
     <BrowserRouter>
-      <p>Connected: { '' + isConnected }</p>
-      <p>Last pong: { lastPong || '-' }</p>
-      <button onClick={ sendPing }>Send ping</button> 
+      <p>Connected: { '' + isConnected }</p> 
       <Canvas/>   
       <Drawing/>
     </BrowserRouter>
