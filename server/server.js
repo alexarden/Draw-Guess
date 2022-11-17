@@ -29,6 +29,10 @@ let connections = 0;
     socket.on('connections', () => {
       socket.emit('connections-from-server', connections);   
     })
+
+    socket.on('can-answer', () => {
+      socket.broadcast.emit('allow-to-answer') 
+    })
   
     socket.on('disconnect', () => {
       connections -= 1

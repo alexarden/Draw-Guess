@@ -22,7 +22,7 @@ export default function Canvas() {
     dispatch(setDrawing(drawings));
   }
 
-  function getWindowSize() {
+  function getWindowSize() { 
     const height = window.innerHeight;
     const width = window.innerWidth;
     const fixedSize = getSize(height, width);
@@ -50,6 +50,7 @@ export default function Canvas() {
     socket.on("drawing-from-server", (data) => {
       if (!data.payload) return;
       canvasRef.current.loadSaveData(data.payload);
+        
     });
 
     return () => {

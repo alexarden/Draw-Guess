@@ -15,12 +15,13 @@ export default function Draw() {
   const dispatch = useDispatch();
   
   const [drawingSent, setDrawingSent] = useState(false);
+  const [canAnswer, setCanAnswer] = useState(false);  
 
   function handleSendClick(){
     socket.emit('drawing', drawing);
     socket.emit('connections');  
+    socket.emit('can-answer');
     setDrawingSent(true);
-
   }
 
   useEffect(() => {
@@ -41,7 +42,11 @@ export default function Draw() {
         dispatch(setWord(word));  
     } 
     console.log('word ', word);  
-    console.log('turn ', turn);
+    console.log('turn ', turn); 
+    socket.on('allow-to-answer', () => {
+      setCanAnswer(true) 
+    })
+    
   },[]); 
 
   
@@ -52,7 +57,7 @@ export default function Draw() {
         drawingSent ? (
           <div>
           <div>Waiting for answer...</div>
-          <Loading/>
+          <Loading /> 
           <SendDrawingButton 
           handleSendClick={handleSendClick} 
           drawingSent={drawingSent}/>
@@ -68,10 +73,8 @@ export default function Draw() {
        )) : (<div>
         <div>Waiting for drawing</div>
         <Canvas/>
-        <SendDrawingButton 
-        handleSendClick={handleSendClick}
-        drawingSent={true}/> 
-        </div>) } 
+        <input disabled={!canAnswer}></input>  
+         </div>) } 
      
     </>
   );
