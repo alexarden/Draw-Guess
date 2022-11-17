@@ -15,7 +15,8 @@ export default function Draw() {
   const dispatch = useDispatch();
   
   const [drawingSent, setDrawingSent] = useState(false);
-  const [canAnswer, setCanAnswer] = useState(false);  
+  const [canAnswer, setCanAnswer] = useState(false); 
+  const [answerInputValue, setAnswerInputValue] = useState('');
 
   function handleSendClick(){
     socket.emit('drawing', drawing);
@@ -46,8 +47,17 @@ export default function Draw() {
     socket.on('allow-to-answer', () => {
       setCanAnswer(true) 
     })
-    
+
   },[]); 
+
+  function handleAnswerSubmit(e){
+    e.preventDefault() 
+    console.log('answer submitted', answerInputValue);  
+  }
+
+  function handleInputChange(e){
+    setAnswerInputValue(e.target.value)
+  } 
 
   
 
@@ -73,8 +83,14 @@ export default function Draw() {
        )) : (<div>
         <div>Waiting for drawing</div>
         <Canvas/>
-        <input disabled={!canAnswer}></input>  
-         </div>) } 
+        <form onSubmit={handleAnswerSubmit}>
+        <input 
+        disabled={!canAnswer}
+        value={answerInputValue}
+        onChange={handleInputChange}
+        /> 
+        </form>
+        </div>) } 
      
     </>
   );
