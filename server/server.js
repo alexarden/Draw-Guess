@@ -30,6 +30,10 @@ let connections = 0;
       socket.emit('connections-from-server', connections);   
     })
 
+    socket.on('word', (data) => {
+      socket.broadcast.emit('get-word', data)
+    })
+
     socket.on('can-answer', () => {
       socket.broadcast.emit('allow-to-answer') 
     })

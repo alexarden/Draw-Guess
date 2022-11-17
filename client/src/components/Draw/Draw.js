@@ -34,7 +34,7 @@ export default function Draw() {
         const turn = Number(sessionStorage.getItem('turn').substring(1,length))
         dispatch(setTurn(turn));  
     } 
-   
+
     if (sessionStorage.getItem("word") === null) {
       sessionStorage.setItem("word", JSON.stringify(word.payload));
     }else{
@@ -47,6 +47,11 @@ export default function Draw() {
     socket.on('allow-to-answer', () => {
       setCanAnswer(true) 
     })
+
+    socket.on('get-word', (data) => {
+      sessionStorage.removeItem('word');
+      sessionStorage.setItem('word', data);
+    }) 
 
   },[]); 
 
@@ -74,7 +79,7 @@ export default function Draw() {
         </div> 
         ) : (
           <div>
-          <div>Draw {word.payload} !</div> 
+          <div>Draw a {word.payload}</div> 
           <Canvas/>
           <SendDrawingButton 
           handleSendClick={handleSendClick} 
