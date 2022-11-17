@@ -19,28 +19,31 @@ app.get('/', (req, res) => {
 
 let connections = 0;  
 
-io.on('connection', (socket) => {
+
+  io.on('connection', (socket) => {
+
+    // Del
+    console.log('a user connected');
+    connections += 1
+    console.log(connections);
+    //
+  
+    socket.on('drawing', (data) => {  
+      socket.broadcast.emit('drawing-from-server', data) 
+    });
+  
+    socket.on('connections', () => {
+      socket.emit('connections-from-server', connections);   
+    })
+  
+    socket.on('disconnect', () => {
+      connections -= 1
+      console.log(connections); 
+    }) 
+  }); 
+  
 
 
-  // Del
-  console.log('a user connected');
-  connections += 1
-  console.log(connections);
-  //
-
-  socket.on('drawing', (data) => {  
-    socket.broadcast.emit('drawing-from-server', data) 
-  });
-
-  socket.on('connections', () => {
-    socket.emit('connections-from-server', connections)  
-  })
-
-  socket.on('disconnect', () => {
-    connections -= 1
-    console.log(connections); 
-  }) 
-}); 
 
 
 server.listen(3001, () => {

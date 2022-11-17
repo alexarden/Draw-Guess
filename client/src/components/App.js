@@ -52,7 +52,7 @@ function App() {
 
         <Routes>
           <Route path="/" element={<Welcome />}></Route>
-          <Route path='choose-word' element={<ChooseWord/>}></Route> 
+          <Route path='chooseWord' element={<ChooseWord/>}></Route> 
           <Route path='draw' element={<Draw/>}></Route>  
         </Routes>
       </div>
