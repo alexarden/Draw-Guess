@@ -22,12 +22,6 @@ let connections = 0;
 
   io.on('connection', (socket) => {
 
-    // Del
-    console.log('a user connected');
-    connections += 1
-    console.log(connections);
-    //
-  
     socket.on('drawing', (data) => {  
       socket.broadcast.emit('drawing-from-server', data) 
     });
@@ -40,6 +34,13 @@ let connections = 0;
       connections -= 1
       console.log(connections); 
     }) 
+
+    // Del 
+    console.log('a user connected');
+    connections += 1
+    console.log(connections);
+    //
+
   }); 
   
 
