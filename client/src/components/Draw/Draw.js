@@ -1,4 +1,5 @@
 import Canvas from "../Canvas/Canvas";
+import Loading from "../Loading/Loading"; 
 import SendDrawingButton from "../../features/drawing/SendDrawingButton";
 import { useSelector, useDispatch } from "react-redux";
 import { setWord } from "../../features/word/wordSlice";
@@ -7,7 +8,7 @@ import {socket} from "../../service/socket.js";
 
 
 export default function Draw() {
-    const drawing = useSelector((state) => state.draw.drawing); 
+  const drawing = useSelector((state) => state.draw.drawing); 
   const word = useSelector((state) => state.word.word);
   const dispatch = useDispatch();
 
@@ -17,13 +18,10 @@ export default function Draw() {
     socket.emit('drawing', drawing);
     socket.emit('connections');
     setDrawingSent(true);
-    console.log('click!');
-      
- 
+
   }
 
   useEffect(() => {
-    // console.log(localStorage.getItem("word")); 
     if (localStorage.getItem("word") === null) {
       localStorage.setItem("word", JSON.stringify(word.payload));
     }else{
@@ -36,8 +34,8 @@ export default function Draw() {
 
   return (
     <>
-      <div>Draw a {word.payload} </div>
-      <Canvas />
+      {drawingSent ? <div>Waiting for answer...</div> : <div>Draw a {word.payload} </div>} 
+      {drawingSent ? <Loading/> : <Canvas/>}
       <SendDrawingButton handleSendClick={handleSendClick} drawingSent={drawingSent}/>
     </>
   );
