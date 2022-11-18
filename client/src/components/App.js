@@ -3,6 +3,8 @@ import { Routes, Route, Outlet, Link } from "react-router-dom";
 import Welcome from './Welcome/Welcome'; 
 import ChooseWord from './ChooseWord/ChooseWord';  
 import Draw from './Draw/Draw'; 
+import Loading from './Loading/Loading'; 
+import NotFound from './NotFound/NotFound'; 
 import style from './App.module.scss';  
 import {socket} from '../service/socket.js';
 
@@ -52,18 +54,16 @@ function App() {
 
         <Routes>
           <Route path="/" element={<Welcome />}></Route>
-          <Route path='chooseWord' element={<ChooseWord/>}></Route> 
-          <Route path='draw' element={<Draw/>}></Route>  
+          <Route path='/chooseWord' element={<ChooseWord/>}></Route> 
+          <Route path='/draw' element={<Draw/>}></Route> 
+          <Route path='/loading' element={<Loading/>}></Route> 
+          <Route path='*' element={<NotFound/>}></Route>  
         </Routes>
       </div>
     
   );
 }
 
- {/* <Route path="draw" element={<Draw />} /> */}
-{/* <Route path="guess" element={<Guess />} /> */}
-{/* <Route path="loading" element={<Loading />} /> */}
-{/* <Route path="*" element={<NoMatch />} />  */}
 
 
 export default App;

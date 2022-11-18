@@ -3,8 +3,15 @@ import { useSelector, useDispatch } from "react-redux";
 import { setWord } from "../../features/word/wordSlice";
 import { Link } from "react-router-dom";
 import {socket} from '../../service/socket'
+import { useEffect } from "react";
 
 export default function ChooseWord() {
+
+  useEffect(() => {
+    if(!sessionStorage.getItem('turn')){
+      sessionStorage.setItem('turn', '1'); 
+    } 
+  })
 
   const word = useSelector((state) => state.word.word);
   const dispatch = useDispatch();

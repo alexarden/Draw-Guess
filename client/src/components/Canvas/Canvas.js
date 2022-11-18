@@ -18,7 +18,10 @@ export default function Canvas() {
 
   function handleCanvasChange() {
     const canvas = canvasRef.current;
-    const drawings = canvas.getSaveData();
+    let drawings = null 
+    if(canvas){
+      drawings = canvas.getSaveData(); 
+    }
     dispatch(setDrawing(drawings));
   }
 

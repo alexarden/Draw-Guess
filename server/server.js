@@ -37,6 +37,10 @@ let connections = 0;
     socket.on('can-answer', () => {
       socket.broadcast.emit('allow-to-answer') 
     })
+ 
+    socket.on('switch-turn', () => {
+      io.emit('switch', 'hey')
+    })
   
     socket.on('disconnect', () => {
       connections -= 1
