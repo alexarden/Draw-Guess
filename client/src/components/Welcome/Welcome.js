@@ -3,11 +3,13 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { setTurn } from "../../features/turn/turnSlice";
+import { useNavigate } from "react-router-dom";
 
 export default function Welcome() {
   const dispatch = useDispatch();
   const turn = useSelector((state) => state.turn.turn);
   const [players, setPlayers] = useState(1); 
+  const navigate = useNavigate();
   let savedTurn = 0;
 
   useEffect(() => {
@@ -24,6 +26,7 @@ export default function Welcome() {
       savedTurn = sessionStorage.getItem("turn");
       dispatch(setTurn(Number(savedTurn)));
     }
+
     console.log('players ', players); 
   }, []);
 
@@ -50,7 +53,8 @@ export default function Welcome() {
           <Link to="/chooseWord">PLAY</Link>
         )
       ) : (
-        <Link to="/draw">Continue</Link>
+        //  
+        navigate('/draw')  
       )}
 
 
