@@ -5,10 +5,11 @@ const { Server } = require("socket.io");
 const cors = require('cors');
 app.use(cors);
 const server = http.createServer(app);
+const port = process.env.PORT || 3001;
 
 const io = new Server(server, {
   cors: {
-    origin: 'http://localhost:3000',
+    origin: 'http://localhost:3000', 
     methods: ['GET', 'POST'],
   },
 });
@@ -59,8 +60,8 @@ let connections = 0;
 
 
 
-server.listen(3001, () => {
-  console.log('listening on *:3001');
+server.listen(port, () => {
+  console.log(`listening on *:${port}`);
 });
 
 

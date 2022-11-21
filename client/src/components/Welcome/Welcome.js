@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { setTurn } from "../../features/turn/turnSlice";
 import { useNavigate } from "react-router-dom";
+import DrawHallway from "../Hallway/DrawHallway";
+import ChooseWordHallway from '../Hallway/ChooseWordHallway'; 
 
 export default function Welcome() {
   const dispatch = useDispatch();
@@ -13,6 +15,7 @@ export default function Welcome() {
   let savedTurn = 0;
 
   useEffect(() => {
+
     if (turn.payload === null && sessionStorage.getItem("turn") === null) {
       socket.emit("connections");
       socket.on("connections-from-server", (connections) => {
@@ -35,6 +38,7 @@ export default function Welcome() {
     socket.on('connections-from-server', (data)=>{
       setPlayers(data) 
     }) 
+
   }
 
   return (
@@ -46,16 +50,13 @@ export default function Welcome() {
           <div>
             <div>Wait for second player...</div>
             <button onClick={handleCheckPlayersclick}>
-              Check for other players
+              Check for new players 
             </button>
           </div>
         ) : (
-          <Link to="/chooseWord">PLAY</Link>
+          <ChooseWordHallway/> 
         )
-      ) : (
-        //  
-        navigate('/draw')  
-      )}
+      ) :  <DrawHallway/>}    
 
 
     </>

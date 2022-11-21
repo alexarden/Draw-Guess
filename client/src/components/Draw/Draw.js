@@ -16,8 +16,8 @@ export default function Draw() {
   const word = useSelector((state) => state.word.word);
   const dispatch = useDispatch();
   const navigate = useNavigate()
-  
-  const [drawingSent, setDrawingSent] = useState(false);
+   
+  const [drawingSent, setDrawingSent] = useState(false); 
   const [canAnswer, setCanAnswer] = useState(false); 
   const [answerInputValue, setAnswerInputValue] = useState('');
   const [styleAfterAnswer, setAfterAnswer] = useState('')
@@ -32,6 +32,8 @@ export default function Draw() {
 
 
   useEffect(() => {
+
+    console.log({turn});  
 
     if (sessionStorage.getItem("turn") === null) {
       sessionStorage.setItem("turn", JSON.stringify(turn.payload));
@@ -69,7 +71,7 @@ export default function Draw() {
         sessionStorage.removeItem('word')  
         
       }else if(sessionStorage.getItem('turn') === '1'){    
-        navigate('/8');   
+        navigate('/error');    
       } 
     }) 
 
@@ -78,33 +80,9 @@ export default function Draw() {
   function handleAnswerSubmit(e){
     e.preventDefault() 
     if(answerInputValue === sessionStorage.getItem('word')){
-
       setAfterAnswer(style.right) 
       socket.emit('switch-turn') 
       console.log(turn.payload); 
-      // Switch turn for players. 
-      // if(turn.payload === 2 ){ 
-      //   setWord('');
-      //   setTurn(1);
-      //   sessionStorage.removeItem('word');
-      //   sessionStorage.removeItem('turn');
-      //   sessionStorage.setItem('turn', '1');
-      //   navigate('/chooseWord');
-      // }else if(turn.payload === 1){
-      //   setWord('');
-      //   setTurn(2);
-      //   sessionStorage.removeItem('word');
-      //   sessionStorage.removeItem('turn');
-      //   sessionStorage.setItem('turn', '2');
-      //   navigate('/draw');
-      // }  
-
-      // Reset word for players.
-
-      // If guesser navigate to work pick.
-
-      // If drawer navigate to waiting fro drawing.
-
     }else{
       setAfterAnswer(style.wrong); 
       setAnswerInputValue(''); 
